@@ -89,6 +89,7 @@ SELECT books.book_id, authors.author_id from books JOIN authors WHERE authors.au
         $con->begin_transaction();
         try {
             $con->query("DELETE FROM books_and_authors WHERE book_id = '$id'");
+            $con->query("DELETE FROM booklist WHERE book_id = '$id'");
             $con->query("DELETE FROM books WHERE id=$id");
             $con->commit();
         } catch (mysqli_sql_exception $e) {
